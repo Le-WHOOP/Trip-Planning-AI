@@ -21,10 +21,10 @@ jobs:
         with:
           dotnet-version: '9.0'
       - name: Restore dependencies
-        working-directory: VortexApi
+        working-directory: Backend
         run: dotnet restore
       - name: Build the solution
-        working-directory: VortexApi
+        working-directory: Backend
         run: dotnet build --no-restore --configuration Release
 
   backend-style:
@@ -37,7 +37,7 @@ jobs:
         with:
           dotnet-version: '9.0'
       - name: Run format
-        working-directory: VortexApi
+        working-directory: Backend
         run: dotnet format --verify-no-changes
 
   backend-tests:
@@ -50,7 +50,7 @@ jobs:
         with:
           dotnet-version: '9.0'
       - name: Run tests
-        working-directory: VortexApi
+        working-directory: Backend
         run: dotnet test
 
   docker-config:
