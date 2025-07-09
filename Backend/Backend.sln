@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Api", "Backend.Api\Backend.Api.csproj", "{3759A6E3-15EE-4537-9112-72A71B977270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Bll", "Backend.Bll\Backend.Bll.csproj", "{11060AEE-127E-42FE-AC9B-4B8166E75511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Dal", "Backend.Dal\Backend.Dal.csproj", "{C2CEE5E2-20B8-4C6B-91F5-10ECECDC4AC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3759A6E3-15EE-4537-9112-72A71B977270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3759A6E3-15EE-4537-9112-72A71B977270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3759A6E3-15EE-4537-9112-72A71B977270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3759A6E3-15EE-4537-9112-72A71B977270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11060AEE-127E-42FE-AC9B-4B8166E75511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11060AEE-127E-42FE-AC9B-4B8166E75511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11060AEE-127E-42FE-AC9B-4B8166E75511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11060AEE-127E-42FE-AC9B-4B8166E75511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2CEE5E2-20B8-4C6B-91F5-10ECECDC4AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2CEE5E2-20B8-4C6B-91F5-10ECECDC4AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2CEE5E2-20B8-4C6B-91F5-10ECECDC4AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2CEE5E2-20B8-4C6B-91F5-10ECECDC4AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
