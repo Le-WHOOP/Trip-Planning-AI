@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Backend.Bll.Services;
 
-namespace Backend.Bll.Services
+public class Parser
 {
-    class Parser
-    {
-    }
+
 }

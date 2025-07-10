@@ -1,7 +1,7 @@
-using Backend.Bll;
 using Backend.Bll.Clients;
 using Backend.Bll.Clients.Interfaces;
 using Backend.Bll.Configuration;
+using Backend.Bll.Services;
 
 namespace Backend.Api;
 
@@ -13,7 +13,8 @@ public static class Program
 
         builder.Services.Configure<LlmConfiguration>(builder.Configuration.GetSection("Llm"));
 
-        builder.Services.AddScoped<Class1>();
+        builder.Services.AddScoped<TravelService>();
+        builder.Services.AddScoped<Parser>();
 
         builder.Services.AddScoped<ILlmClient, PerplexityClient>();
 
@@ -28,8 +29,6 @@ public static class Program
         {
             app.MapOpenApi();
         }
-
-        app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

@@ -19,5 +19,5 @@ public interface ILlmClient
         public string Content { get; } = content;
     }
 
-    public Task<string> SendMessageAsync(IEnumerable<Message> messages);
+    public Task<string?> SendMessageAsync(IEnumerable<Message> messages);
 }
