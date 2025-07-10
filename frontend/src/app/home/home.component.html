@@ -7,20 +7,22 @@
         <mat-form-field appearance="fill">
             <mat-label>Country</mat-label>
             <mat-icon matSuffix>location_city</mat-icon>
-            <input matInput placeholder="France..." [formControl]="country">
-            @if (countryError()) {
+            <input matInput placeholder="France..." [formControl]="country" (blur)="updateCountryError()">
+            @if (country.invalid) {
                 <mat-error>{{ countryError() }}</mat-error>
             }
         </mat-form-field>
         <mat-form-field>
             <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date" [formControl]="start">
+            <mat-date-range-input [rangePicker]="picker" [min]="today">
+                <input matStartDate
+                    placeholder="Start date"
+                    [formControl]="start">
                 <input matEndDate placeholder="End date" [formControl]="end">
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
-            @if (dateError()) {
+            @if (start.invalid || end.invalid) {
                 <mat-error>{{ dateError() }}</mat-error>
             }
         </mat-form-field>
@@ -50,12 +52,8 @@
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
                     (matChipInputTokenEnd)="add($event)"
-                    (blur)="updateWishesError()"
                 />
             </mat-chip-grid>
-            @if (wishesError()) {
-                <mat-error>{{ wishesError() }}</mat-error>
-            }
         </mat-form-field>
         <button mat-flat-button color="primary" class="submit" (click)="fetchData()">Validate</button>
     </mat-card-footer>

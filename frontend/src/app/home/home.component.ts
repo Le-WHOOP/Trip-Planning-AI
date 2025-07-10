@@ -3,6 +3,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
@@ -21,6 +22,7 @@ import { TravelResponse } from '../api/models/travel-response';
 @Component({
   selector: 'app-form',
   imports: [
+    CommonModule,
     MatCardModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -40,6 +42,10 @@ export class HomeComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   readonly announcer = inject(LiveAnnouncer);
   private readonly apiService = inject(ApiService);
+  today = new Date();
+  filters = (d: Date | null): boolean => {
+    return (d || new Date()) >= this.today;
+  }
 
   readonly country = new FormControl('', Validators.required);
   readonly start = new FormControl(null, Validators.required);
@@ -49,27 +55,22 @@ export class HomeComponent {
   readonly countryError = signal('');
   readonly dateError = signal('');
   readonly wishesError = signal('');
+  readonly chipError = signal(false);
 
   constructor() {
     // Country
     merge(this.country.valueChanges, this.country.statusChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => {
-        this.countryError.set(
-          this.country.hasError('required') ? 'Country is required' : ''
-        );
-      });
+        this.updateCountryError();
+    });
 
     // Date
     merge(this.start.valueChanges, this.start.statusChanges, this.end.valueChanges, this.end.statusChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => {
-        if (this.start.hasError('required') || this.end.hasError('required')) {
-          this.dateError.set('Start and end dates are required');
-        } else {
-          this.dateError.set('');
-        }
-      });
+        this.updateDateError();
+    });
   }
 
   add(event: MatChipInputEvent): void {
@@ -97,15 +98,26 @@ export class HomeComponent {
     });
   }
 
-  updateWishesError() {
-    this.wishesError.set(this.wishes().length === 0 ? 'At least one wish is required' : '');
+  updateCountryError() {
+    this.countryError.set(
+      this.country.hasError('required') ? 'Country is required' : ''
+    );
+  }
+
+  updateDateError() {
+    if (this.start.hasError('required') || this.end.hasError('required')) {
+      this.dateError.set('Start and end dates are required');
+    } else {
+      this.dateError.set('');
+    }
   }
 
   fetchData() {
     this.country.markAsTouched();
     this.start.markAsTouched();
     this.end.markAsTouched();
-    this.updateWishesError();
+    this.updateCountryError();
+    this.updateDateError();
 
     if (this.country.invalid || this.start.invalid || this.end.invalid || this.wishes().length === 0) {
       console.warn('Form invalid');
