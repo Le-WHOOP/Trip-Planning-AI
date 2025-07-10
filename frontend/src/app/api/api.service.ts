@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { TravelRequest } from './models/travel-request';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { TravelResponse } from './models/travel-response';
 
 @Injectable({
@@ -14,11 +14,13 @@ export class ApiService {
   private travelResponseSource = new BehaviorSubject<TravelResponse>(null!);
   travelResponse$ = this.travelResponseSource.asObservable();
 
-  private getTravelPlan(travelRequest: TravelRequest) : Observable<TravelResponse> {
+  private getTravelPlan(travelRequest: TravelRequest): Observable<TravelResponse> {
     return this.httpClient.post<TravelResponse>(this.url, travelRequest);
   }
 
-  public setTravelPlan(travelRequest: TravelRequest) {
-    this.getTravelPlan(travelRequest).subscribe(travelResponse => this.travelResponseSource.next(travelResponse));
+  public async setTravelPlan(travelRequest: TravelRequest): Promise<void> {
+    const travelResponse = await firstValueFrom(this.getTravelPlan(travelRequest));
+    this.travelResponseSource.next(travelResponse);
+    console.log(travelResponse);
   }
 }

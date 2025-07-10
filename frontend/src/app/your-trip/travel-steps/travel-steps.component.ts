@@ -15,5 +15,5 @@ import { Trip } from '../../api/models/trip';
 })
 export class TravelStepsComponent {
   public displayedColumns: string[] = ['fromCity', 'toCity', 'transportationType', 'travelTime', 'price', 'website'];
-  @Input({ required: true }) trips: Trip[] = [];
+  @Input({ required: true }) trips!: Trip[];
 }
