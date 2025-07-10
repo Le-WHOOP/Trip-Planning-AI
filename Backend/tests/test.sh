@@ -7,6 +7,6 @@ curl http://localhost:8080/travel \
     -d '{
         "country": "Japan",
         "from": "2025-08-01",
-        "to": "2025-08-15",
+        "to": "2025-08-30",
         "wishes": "Mountains, culture, sushi"
     }' -v

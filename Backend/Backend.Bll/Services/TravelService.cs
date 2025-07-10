@@ -8,12 +8,12 @@ namespace Backend.Bll.Services;
 
 public class TravelService
 {
-    private const string PROMPT = @"
+    private static string Prompt(int attractionCount) => @$"
 You will be given a JSON schema that defines the structure of a travel plan. Based on this schema, you must generate a complete trip itinerary using the user-provided input.
 
 The travel plan must:
 - Include cities to visit, with associated start and end dates.
-- Each city must include a list of attractions that align with the user's stay dates. Provide no fewer than one attraction per day, including a mix of cultural landmarks, festivals, gardens, exhibitions, or time-limited events
+- Each city must include a list of attractions that align with the user's stay dates. Provide no fewer than {attractionCount} distinct attractions, while keeping in mind the user's interests.
 - For each attraction, provide:
   - Its name
   - A short description
@@ -48,10 +48,18 @@ Strictly adhere to the given JSON schema in your output. Do not include any extr
             return null;
         }
 
-        Response? result = JsonSerializer.Deserialize<Response>(response, new JsonSerializerOptions()
+        Response? result;
+        try
         {
-            PropertyNameCaseInsensitive = true
-        });
+            result = JsonSerializer.Deserialize<Response>(response, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+        }
+        catch
+        {
+            result = null;
+        }
 
         if (result is null)
             _logger.LogWarning("Response couldn't be parsed");
@@ -59,13 +67,13 @@ Strictly adhere to the given JSON schema in your output. Do not include any extr
         return result;
     }
 
-    private Task<string?> GenerateSuggestion(string format, string data)
+    private Task<string?> GenerateSuggestion(string prompt, string format, string data)
     {
         try
         {
             return _llmClient.SendMessageAsync(
             [
-                new ILlmClient.Message(ILlmClient.Message.MessageRole.System, PROMPT),
+                new ILlmClient.Message(ILlmClient.Message.MessageRole.System, prompt),
                 new ILlmClient.Message(ILlmClient.Message.MessageRole.System, format),
                 new ILlmClient.Message(ILlmClient.Message.MessageRole.User, data),
             ]);
@@ -78,14 +86,21 @@ Strictly adhere to the given JSON schema in your output. Do not include any extr
 
     public async Task<Response> DoYourThing(Request request)
     {
+        // Should suggest at least one attraction for each day of the duration
+        int requestedAttractionCount = (request.To - request.From).Days;
+        string prompt = Prompt(requestedAttractionCount);
         string responseStructure = GetResponseStructure();
         string data = JsonSerializer.Serialize(request);
 
         Response? result;
         do
         {
-            result = ParseResponse(await GenerateSuggestion(responseStructure, data));
+            result = ParseResponse(await GenerateSuggestion(prompt, responseStructure, data));
         } while (result is null);
+
+        int suggestedAttractionCount = result.InterestPoints.Attractions.Count;
+        if (suggestedAttractionCount < requestedAttractionCount)
+            _logger.LogWarning("Expected {Requested} attractions, but got only {Suggested}", requestedAttractionCount, suggestedAttractionCount);
         return result;
     }
 }
