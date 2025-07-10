@@ -18,6 +18,9 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@schedule-x/angular": "^2.33.0",
+    "@schedule-x/calendar": "^2.36.0",
+    "@schedule-x/theme-default": "^2.36.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
