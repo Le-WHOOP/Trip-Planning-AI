@@ -12,5 +12,5 @@ check:
 	./Backend/tests/test.sh; $(MAKE) down
 
 debug:
-	docker compose up backend --build -d
+	docker compose -f docker-compose.yml -f docker-compose.debug.yml up backend --build -d
 	cd frontend && ng serve

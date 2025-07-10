@@ -1,16 +1,11 @@
-networks:
-  network-vortex-front:
-
 services:
 
-  vortex-web:
+  frontend:
     build:
       context: ./
       dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - network-vortex-front
-    ports:
-      - 4200:80
+    expose:
+      - 80

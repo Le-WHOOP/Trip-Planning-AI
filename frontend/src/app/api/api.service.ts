@@ -3,13 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { TravelRequest } from './models/travel-request';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { TravelResponse } from './models/travel-response';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private readonly httpClient = inject(HttpClient);
-  private readonly url = '/api/travel';
+  private readonly url = `${environment.apiUrl}/travel`;
 
   private travelResponseSource = new BehaviorSubject<TravelResponse | null>(null);
   travelResponse$ = this.travelResponseSource.asObservable();
