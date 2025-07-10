@@ -7,10 +7,16 @@
 html,
 body {
     height: 100%;
-    color-scheme: light dark;
+    color-scheme: dark;
 }
 
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+    text-decoration: solid;
+    text-decoration-line: underline;
+    text-decoration-color: var(--mat-sys-primary);
 }

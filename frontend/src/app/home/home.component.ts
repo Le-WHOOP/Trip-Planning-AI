@@ -17,7 +17,7 @@ import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApiService } from '../api/api.service';
 import { TravelRequest } from '../api/models/travel-request';
-import { TravelResponse } from '../api/models/travel-response';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -40,6 +40,7 @@ import { TravelResponse } from '../api/models/travel-response';
 export class HomeComponent {
   readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  private readonly router: Router = inject(Router);
   readonly announcer = inject(LiveAnnouncer);
   private readonly apiService = inject(ApiService);
   today = new Date();
@@ -112,7 +113,7 @@ export class HomeComponent {
     }
   }
 
-  fetchData() {
+  public async fetchData() {
     this.country.markAsTouched();
     this.start.markAsTouched();
     this.end.markAsTouched();
@@ -133,13 +134,8 @@ export class HomeComponent {
 
     console.log('Form submitted', travelRequest);
 
-    this.apiService.getTravelPlan(travelRequest).subscribe({
-      next: (response: TravelResponse) => {
-        console.log('API response:', response);
-      },
-      error: (error) => {
-        console.error('API error:', error);
-      }
-    });
+    // TODO Make the button not clickable anymore and show loading animation
+    await this.apiService.setTravelPlan(travelRequest);
+    this.router.navigate(['/your-trip']);
   }
 }
