@@ -4,9 +4,9 @@ public class CityPlanning
 {
     public string City { get; set; } = default!;
 
-    public DateOnly From { get; set; } = default!;
+    public DateTime From { get; set; } = default!;
 
-    public DateOnly To { get; set; } = default!;
+    public DateTime To { get; set; } = default!;
 
     public string Description { get; set; } = default!;
 
