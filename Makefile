@@ -5,3 +5,8 @@ up:
 
 down:
 	docker compose down
+
+check:
+	docker compose up backend --build -d
+	sleep 2
+	./Backend/tests/test.sh; $(MAKE) down

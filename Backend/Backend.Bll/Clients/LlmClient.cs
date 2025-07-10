@@ -9,6 +9,22 @@ namespace Backend.Bll.Clients;
 
 public abstract class LlmClient : ILlmClient
 {
+    private class CompletionResponse
+    {
+        public class Choice
+        {
+            public class MessageContent
+            {
+                public string Role { get; set; } = string.Empty;
+                public string Content { get; set; } = string.Empty;
+            }
+
+            public MessageContent Message { get; set; } = new();
+        }
+
+        public List<Choice> Choices { get; set; } = new();
+    }
+
     private readonly HttpClient _httpClient;
     protected readonly LlmConfiguration _llmConfiguration;
 
@@ -24,7 +40,7 @@ public abstract class LlmClient : ILlmClient
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _llmConfiguration.ApiKey);
     }
 
-    public async Task<string> SendMessageAsync(IEnumerable<ILlmClient.Message> messages)
+    public async Task<string?> SendMessageAsync(IEnumerable<ILlmClient.Message> messages)
     {
         var requestBody = new
         {
@@ -33,7 +49,6 @@ public abstract class LlmClient : ILlmClient
         };
 
         string json = JsonSerializer.Serialize(requestBody).ToLower();
-        Console.WriteLine(json);
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
         HttpResponseMessage response = await _httpClient.PostAsync(Path, content);
@@ -41,7 +56,11 @@ public abstract class LlmClient : ILlmClient
         if (response.IsSuccessStatusCode)
         {
             string responseBody = await response.Content.ReadAsStringAsync();
-            return responseBody;
+            CompletionResponse? result = JsonSerializer.Deserialize<CompletionResponse>(responseBody, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return result?.Choices.FirstOrDefault()?.Message.Content;
         }
         else
         {
