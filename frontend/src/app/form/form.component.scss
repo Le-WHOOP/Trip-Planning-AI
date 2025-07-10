@@ -1,0 +1,32 @@
+.card {
+    margin-top: 50px;
+    margin-inline: auto;
+    width: 60%;
+}
+
+.card-header {
+    margin: auto;
+    padding-bottom: 20px;
+}
+.card-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 16px;
+}
+
+.first-line {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-field {
+    margin-right: 20px;
+}
+
+.chip-list {
+    width: 70%;
+}
+
+.submit {
+    margin-top: 10px;
+}

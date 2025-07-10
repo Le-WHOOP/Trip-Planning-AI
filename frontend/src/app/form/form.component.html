@@ -1,0 +1,62 @@
+<mat-card class="card" appearance="outlined">
+  <mat-card-header class="card-header">
+    <mat-card-title>Let us plan your trip !</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="first-line">
+        <mat-form-field appearance="fill">
+            <mat-label>Country</mat-label>
+            <mat-icon matSuffix>location_city</mat-icon>
+            <input matInput placeholder="Paris..." [formControl]="country">
+            @if (countryError()) {
+                <mat-error>{{ countryError() }}</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" [formControl]="start">
+                <input matEndDate placeholder="End date" [formControl]="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            @if (dateError()) {
+                <mat-error>{{ dateError() }}</mat-error>
+            }
+        </mat-form-field>
+    </div>
+    <div>
+        
+    </div>
+    </mat-card-content>
+    <mat-card-footer class="card-footer">
+        <mat-form-field class="chip-list">
+            <mat-label>Wishes</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter wishes">
+                @for (wish of wishes(); track wish) {
+                <mat-chip-row
+                    (removed)="remove(wish)"
+                    [editable]="true"
+                >     
+                    {{wish}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + wish">
+                    <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+                }
+                <input
+                    placeholder="New wish..."
+                    [matChipInputFor]="chipGrid"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                    (blur)="updateWishesError()"
+                />
+            </mat-chip-grid>
+            @if (wishesError()) {
+                <mat-error>{{ wishesError() }}</mat-error>
+            }
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="submit" (click)="fetchData()">Validate</button>
+    </mat-card-footer>
+</mat-card>
