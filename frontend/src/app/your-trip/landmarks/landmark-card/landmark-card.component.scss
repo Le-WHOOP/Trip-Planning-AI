@@ -1,0 +1,14 @@
+mat-card-content {
+    display: flex;
+}
+
+mat-card-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    margin: 15;
+}

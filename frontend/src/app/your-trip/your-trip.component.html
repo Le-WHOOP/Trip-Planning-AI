@@ -8,6 +8,8 @@
         <mat-tab label="Traveling">
             <app-travel-steps [trips]="(travelResponse$ | async)?.travel?.trips ?? []"></app-travel-steps>
         </mat-tab>
-        <mat-tab label="Sightseeing">Sightseeing</mat-tab>
+        <mat-tab label="Sightseeing">
+            <app-landmarks [landmarks]="(travelResponse$ | async)?.interestPoints?.attractions ?? []" [planning]="(travelResponse$ | async)?.planning?.cityPlannings ?? []"/>
+        </mat-tab>
     </mat-tab-group>
 </div>
