@@ -21,8 +21,8 @@ export class LandmarkPanelComponent {
 
   ngOnInit() {
     this.matchingLandmarks = this.landmarks.attractions.filter(attraction => attraction.city === this.cityPlanning.city);
-    this.from = this.formatDate(this.cityPlanning.from);
-    this.to = this.formatDate(this.cityPlanning.to);
+    this.from = this.formatDate(new Date(this.cityPlanning.from));
+    this.to = this.formatDate(new Date(this.cityPlanning.to));
   }
 
   formatDate(date: Date): string {

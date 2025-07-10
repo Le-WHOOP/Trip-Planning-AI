@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import { LandmarksComponent } from "./landmarks/landmarks.component";
 import { TravelResponse } from '../api/models/travel-response';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-your-trip',
@@ -11,4 +12,5 @@ import { TravelResponse } from '../api/models/travel-response';
 })
 export class YourTripComponent {
   response!: TravelResponse;
+  travelService: ApiService = inject(ApiService);
 }
