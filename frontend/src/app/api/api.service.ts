@@ -11,7 +11,7 @@ export class ApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly url = '/api/travel';
 
-  private travelResponseSource = new BehaviorSubject<TravelResponse>(null!);
+  private travelResponseSource = new BehaviorSubject<TravelResponse | null>(null);
   travelResponse$ = this.travelResponseSource.asObservable();
 
   private getTravelPlan(travelRequest: TravelRequest): Observable<TravelResponse> {
@@ -22,5 +22,9 @@ export class ApiService {
     const travelResponse = await firstValueFrom(this.getTravelPlan(travelRequest));
     this.travelResponseSource.next(travelResponse);
     console.log(travelResponse);
+  }
+
+  public hasTravelPlan(): boolean {
+    return this.travelResponseSource.getValue() !== null;
   }
 }
