@@ -13,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './your-trip.component.scss'
 })
 export class YourTripComponent {
-  public travelResponse$!: Observable<TravelResponse>;
+  public travelResponse$!: Observable<TravelResponse | null>;
 
   constructor(private apiService: ApiService) {
   }
