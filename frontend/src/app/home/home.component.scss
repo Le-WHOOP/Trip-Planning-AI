@@ -1,5 +1,3 @@
-@use '@angular/material' as mat;
-
 .card {
     margin-top: 50px;
     margin-inline: auto;
@@ -31,10 +29,4 @@
 
 .submit {
     margin-top: 10px;
-}
-
-:root {
-  @include mat.progress-spinner-overrides((
-    size: 50px,
-  ));
 }
