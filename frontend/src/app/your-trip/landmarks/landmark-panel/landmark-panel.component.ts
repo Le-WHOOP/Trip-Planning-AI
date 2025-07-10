@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LandmarkCardComponent } from "../landmark-card/landmark-card.component";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CityPlanning } from '../../../api/models/city-planning';
@@ -11,7 +11,7 @@ import { Attraction } from '../../../api/models/attraction';
   templateUrl: './landmark-panel.component.html',
   styleUrl: './landmark-panel.component.scss'
 })
-export class LandmarkPanelComponent {
+export class LandmarkPanelComponent implements OnInit {
   @Input({ required: true }) cityPlanning!: CityPlanning;
   @Input({required : true}) landmarks!: Attraction[];
   matchingLandmarks : Attraction[] = [];
