@@ -1,4 +1,4 @@
-namespace Backend.Dal.Configuration;
+namespace Backend.Bll.Configuration;
 
 public class LlmConfiguration
 {

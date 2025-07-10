@@ -1,7 +1,7 @@
 using Backend.Bll;
-using Backend.Dal.Clients;
-using Backend.Dal.Clients.Interfaces;
-using Backend.Dal.Configuration;
+using Backend.Bll.Clients;
+using Backend.Bll.Clients.Interfaces;
+using Backend.Bll.Configuration;
 
 namespace Backend.Api;
 

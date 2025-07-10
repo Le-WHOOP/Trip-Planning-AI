@@ -1,6 +1,6 @@
-﻿using Backend.Dal.Clients.Interfaces;
-using static Backend.Dal.Clients.Interfaces.ILlmClient;
-using static Backend.Dal.Clients.Interfaces.ILlmClient.Message;
+﻿using Backend.Bll.Clients.Interfaces;
+using static Backend.Bll.Clients.Interfaces.ILlmClient;
+using static Backend.Bll.Clients.Interfaces.ILlmClient.Message;
 
 namespace Backend.Bll;
 

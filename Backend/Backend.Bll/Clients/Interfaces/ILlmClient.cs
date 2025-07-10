@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Backend.Dal.Clients.Interfaces;
+namespace Backend.Bll.Clients.Interfaces;
 
 public interface ILlmClient
 {

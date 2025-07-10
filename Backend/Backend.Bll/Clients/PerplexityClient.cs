@@ -1,7 +1,7 @@
-using Backend.Dal.Configuration;
+using Backend.Bll.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Backend.Dal.Clients;
+namespace Backend.Bll.Clients;
 
 public class PerplexityClient : LlmClient
 {

@@ -1,11 +1,11 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using Backend.Dal.Clients.Interfaces;
-using Backend.Dal.Configuration;
+using Backend.Bll.Clients.Interfaces;
+using Backend.Bll.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Backend.Dal.Clients;
+namespace Backend.Bll.Clients;
 
 public abstract class LlmClient : ILlmClient
 {
