@@ -30,12 +30,12 @@ import { TravelResponse } from '../api/models/travel-response';
     MatButtonModule,
     ReactiveFormsModule
   ],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.scss',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent {
+export class HomeComponent {
   readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   readonly announcer = inject(LiveAnnouncer);
