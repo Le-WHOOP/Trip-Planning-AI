@@ -124,6 +124,6 @@ export class HomeComponent {
 
     // TODO Make the button not clickable anymore and show loading animation
     await this.apiService.setTravelPlan(travelRequest);
-    this.router.navigate(['/trip']);
+    this.router.navigate(['/your-trip']);
   }
 }
