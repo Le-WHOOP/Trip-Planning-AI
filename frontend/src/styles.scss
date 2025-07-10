@@ -14,3 +14,9 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+h1 {
+    text-decoration: solid;
+    text-decoration-line: underline;
+    text-decoration-color: var(--mat-sys-primary);
+}
