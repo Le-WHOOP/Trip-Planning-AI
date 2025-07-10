@@ -1,4 +1,4 @@
-.PHONY: up down
+.PHONY: up down check debug
 
 up:
 	docker compose up --build -d

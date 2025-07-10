@@ -3,7 +3,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
@@ -17,12 +16,12 @@ import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApiService } from '../api/api.service';
 import { TravelRequest } from '../api/models/travel-request';
-import { TravelResponse } from '../api/models/travel-response';
+import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-form',
   imports: [
-    CommonModule,
     MatCardModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -30,7 +29,8 @@ import { TravelResponse } from '../api/models/travel-response';
     MatIconModule,
     MatDatepickerModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -40,6 +40,7 @@ import { TravelResponse } from '../api/models/travel-response';
 export class HomeComponent {
   readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  private readonly router: Router = inject(Router);
   readonly announcer = inject(LiveAnnouncer);
   private readonly apiService = inject(ApiService);
   today = new Date();
@@ -55,7 +56,7 @@ export class HomeComponent {
   readonly countryError = signal('');
   readonly dateError = signal('');
   readonly wishesError = signal('');
-  readonly chipError = signal(false);
+  readonly loading = signal(false);
 
   constructor() {
     // Country
@@ -112,7 +113,7 @@ export class HomeComponent {
     }
   }
 
-  fetchData() {
+  public async fetchData() {
     this.country.markAsTouched();
     this.start.markAsTouched();
     this.end.markAsTouched();
@@ -133,13 +134,8 @@ export class HomeComponent {
 
     console.log('Form submitted', travelRequest);
 
-    this.apiService.getTravelPlan(travelRequest).subscribe({
-      next: (response: TravelResponse) => {
-        console.log('API response:', response);
-      },
-      error: (error) => {
-        console.error('API error:', error);
-      }
-    });
+    this.loading.set(true);
+    await this.apiService.setTravelPlan(travelRequest);
+    this.router.navigate(['/your-trip']);
   }
 }
