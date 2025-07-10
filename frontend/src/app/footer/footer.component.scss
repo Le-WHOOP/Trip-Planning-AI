@@ -1,0 +1,27 @@
+.footer-container {
+    border-top: solid 1px var(--mat-sys-outline-variant);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 4rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.github {
+    margin-top: 5px;
+    width: 30px;
+    height: 30px;
+    color: #ccc;
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #ccc;
+}
