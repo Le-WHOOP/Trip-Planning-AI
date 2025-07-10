@@ -62,8 +62,6 @@ export class PlanningComponent implements OnInit {
   mapCityPlanningToCityEvent(cityPlanning: CityPlanning, id: number): CityEvent {
     const location = `Recommended accommodation: ${cityPlanning.accommodation.name} (${cityPlanning.accommodation.website})`;
 
-
-    console.log(location);
     const cityEvent: CityEvent = {
       id: id,
       title: cityPlanning.city,
