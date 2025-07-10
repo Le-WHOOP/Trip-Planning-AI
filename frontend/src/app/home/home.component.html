@@ -55,6 +55,10 @@
                 />
             </mat-chip-grid>
         </mat-form-field>
-        <button mat-flat-button color="primary" class="submit" (click)="fetchData()">Validate</button>
+        @if (loading()) {
+            <mat-spinner diameter="50" class="submit"></mat-spinner>
+        } @else {
+            <button mat-flat-button color="primary" class="submit" (click)="fetchData()">Validate</button>
+        }
     </mat-card-footer>
 </mat-card>
