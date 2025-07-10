@@ -6,6 +6,6 @@
         public DateOnly From { get; set; }
         public DateOnly To { get; set; }
         public string Description { get; set; }
-        public Hotel Hotel { get; set; }
+        public Accommodation Accommodation { get; set; }
     }
 }
