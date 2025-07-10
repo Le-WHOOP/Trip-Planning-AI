@@ -3,13 +3,14 @@ import { inject, Injectable } from '@angular/core';
 import { TravelRequest } from './models/travel-request';
 import { Observable } from 'rxjs';
 import { TravelResponse } from './models/travel-response';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private readonly httpClient = inject(HttpClient);
-  private readonly url = '/api/travel';
+  private readonly url = `${environment.apiUrl}/travel`;
 
   getTravelPlan(travelRequest: TravelRequest) : Observable<TravelResponse> {
     return this.httpClient.post<TravelResponse>(this.url, travelRequest);

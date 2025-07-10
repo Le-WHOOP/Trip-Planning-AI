@@ -1,3 +1,13 @@
 include:
   - frontend/docker-compose.yml
   - Backend/docker-compose.yml
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 8000:80
+
