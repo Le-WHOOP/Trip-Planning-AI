@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LandmarkCardComponent } from "../landmark-card/landmark-card.component";
 import {MatExpansionModule} from '@angular/material/expansion';
-import { InterestPoints } from '../../../api/models/interest-points';
 import { CityPlanning } from '../../../api/models/city-planning';
 import { Attraction } from '../../../api/models/attraction';
 
@@ -16,8 +15,8 @@ export class LandmarkPanelComponent {
   @Input({ required: true }) cityPlanning!: CityPlanning;
   @Input({required : true}) landmarks!: Attraction[];
   matchingLandmarks : Attraction[] = [];
-  from: string = "";
-  to: string = "";
+  from = "";
+  to = "";
 
   ngOnInit() {
     this.matchingLandmarks = this.landmarks.filter(attraction => attraction.city === this.cityPlanning.city);

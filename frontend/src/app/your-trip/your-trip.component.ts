@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TravelStepsComponent } from './travel-steps/travel-steps.component';
 import { TravelResponse } from '../api/models/travel-response';
@@ -15,10 +15,8 @@ import { LandmarksComponent } from './landmarks/landmarks.component';
 })
 export class YourTripComponent {
   public travelResponse$!: Observable<TravelResponse | null>;
-
-  constructor(private apiService: ApiService) {
-  }
-
+  private apiService: ApiService = inject(ApiService);
+  
   ngOnInit(): void {
     this.travelResponse$ = this.apiService.travelResponse$;
   }
