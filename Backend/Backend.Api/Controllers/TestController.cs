@@ -18,5 +18,5 @@ public class TestController : ControllerBase
     public async Task<ActionResult<string>> Test()
     {
         return Ok(await _class1.Test());
-    } 
+    }
 }
