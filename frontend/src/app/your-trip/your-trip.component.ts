@@ -5,10 +5,11 @@ import { TravelResponse } from '../api/models/travel-response';
 import { ApiService } from '../api/api.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { LandmarksComponent } from './landmarks/landmarks.component';
 
 @Component({
   selector: 'app-your-trip',
-  imports: [AsyncPipe, MatTabsModule, TravelStepsComponent],
+  imports: [AsyncPipe, MatTabsModule, TravelStepsComponent, LandmarksComponent],
   templateUrl: './your-trip.component.html',
   styleUrl: './your-trip.component.scss'
 })
