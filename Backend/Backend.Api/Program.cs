@@ -1,3 +1,8 @@
+using Backend.Bll;
+using Backend.Bll.Clients;
+using Backend.Bll.Clients.Interfaces;
+using Backend.Bll.Configuration;
+
 namespace Backend.Api;
 
 public static class Program
@@ -6,7 +11,11 @@ public static class Program
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        builder.Services.Configure<LlmConfiguration>(builder.Configuration.GetSection("Llm"));
+
+        builder.Services.AddScoped<Class1>();
+
+        builder.Services.AddScoped<ILlmClient, PerplexityClient>();
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
