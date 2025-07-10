@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CalendarComponent } from "@schedule-x/angular";
 import { CalendarApp, CalendarEventExternal, createCalendar, createViewMonthGrid } from "@schedule-x/calendar";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
@@ -21,7 +21,7 @@ interface CityEvent {
   templateUrl: './planning.component.html',
   styleUrl: './planning.component.scss'
 })
-export class PlanningComponent {
+export class PlanningComponent implements OnInit {
   @Input({ required: true }) cityPlanningArray!: CityPlanning[];
 
   cityEventArray: CalendarEventExternal[] = [];
@@ -49,7 +49,7 @@ export class PlanningComponent {
   }
 
   mapCityPlanningArrayToCityEventArray(cityPlanningArray: CityPlanning[]): CityEvent[] {
-    let cityEventArray: CityEvent[] = [];
+    const cityEventArray: CityEvent[] = [];
 
     for (let id = 0; id < cityPlanningArray.length; id++) {
       const cityEvent = this.mapCityPlanningToCityEvent(cityPlanningArray[id], id);
@@ -60,7 +60,7 @@ export class PlanningComponent {
   }
 
   mapCityPlanningToCityEvent(cityPlanning: CityPlanning, id: number): CityEvent {
-    const location: string = `Recommended accommodation: ${cityPlanning.accommodation.name} (${cityPlanning.accommodation.website})`;
+    const location = `Recommended accommodation: ${cityPlanning.accommodation.name} (${cityPlanning.accommodation.website})`;
 
 
     console.log(location);

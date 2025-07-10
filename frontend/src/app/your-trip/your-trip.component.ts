@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TravelStepsComponent } from './travel-steps/travel-steps.component';
 import { PlanningComponent } from './planning/planning.component';
@@ -14,7 +14,7 @@ import { LandmarksComponent } from './landmarks/landmarks.component';
   templateUrl: './your-trip.component.html',
   styleUrl: './your-trip.component.scss'
 })
-export class YourTripComponent {
+export class YourTripComponent implements OnInit {
   public travelResponse$!: Observable<TravelResponse | null>;
   private apiService: ApiService = inject(ApiService);
 
