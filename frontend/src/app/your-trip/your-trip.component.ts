@@ -1,16 +1,25 @@
-import { Component, inject } from '@angular/core';
-import {MatTabsModule} from '@angular/material/tabs';
-import { LandmarksComponent } from "./landmarks/landmarks.component";
+import { Component } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TravelStepsComponent } from './travel-steps/travel-steps.component';
 import { TravelResponse } from '../api/models/travel-response';
 import { ApiService } from '../api/api.service';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { LandmarksComponent } from './landmarks/landmarks.component';
 
 @Component({
   selector: 'app-your-trip',
-  imports: [MatTabsModule, LandmarksComponent],
+  imports: [AsyncPipe, MatTabsModule, TravelStepsComponent, LandmarksComponent],
   templateUrl: './your-trip.component.html',
   styleUrl: './your-trip.component.scss'
 })
 export class YourTripComponent {
-  response!: TravelResponse;
-  travelService: ApiService = inject(ApiService);
+  public travelResponse$!: Observable<TravelResponse>;
+
+  constructor(private apiService: ApiService) {
+  }
+
+  ngOnInit(): void {
+    this.travelResponse$ = this.apiService.travelResponse$;
+  }
 }

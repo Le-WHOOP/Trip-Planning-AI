@@ -14,13 +14,13 @@ import { Attraction } from '../../../api/models/attraction';
 })
 export class LandmarkPanelComponent {
   @Input({ required: true }) cityPlanning!: CityPlanning;
-  @Input({required : true}) landmarks!: InterestPoints;
+  @Input({required : true}) landmarks!: Attraction[];
   matchingLandmarks : Attraction[] = [];
   from: string = "";
   to: string = "";
 
   ngOnInit() {
-    this.matchingLandmarks = this.landmarks.attractions.filter(attraction => attraction.city === this.cityPlanning.city);
+    this.matchingLandmarks = this.landmarks.filter(attraction => attraction.city === this.cityPlanning.city);
     this.from = this.formatDate(new Date(this.cityPlanning.from));
     this.to = this.formatDate(new Date(this.cityPlanning.to));
   }

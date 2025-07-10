@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { InterestPoints } from '../../api/models/interest-points';
 import { Planning } from '../../api/models/planning';
 import { LandmarkPanelComponent } from "./landmark-panel/landmark-panel.component";
+import { Attraction } from '../../api/models/attraction';
+import { CityPlanning } from '../../api/models/city-planning';
 
 @Component({
   selector: 'app-landmarks',
@@ -10,6 +12,6 @@ import { LandmarkPanelComponent } from "./landmark-panel/landmark-panel.componen
   styleUrl: './landmarks.component.scss'
 })
 export class LandmarksComponent {
-  @Input({ required: true }) landmarks!: InterestPoints;
-  @Input({ required: true }) planning!: Planning;
+  @Input({ required: true }) landmarks!: Attraction[];
+  @Input({ required: true }) planning!: CityPlanning[];
 }
