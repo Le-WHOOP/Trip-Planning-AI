@@ -5,7 +5,9 @@
         <mat-tab label="Planning">
             <app-planning></app-planning>
         </mat-tab>
-        <mat-tab label="Traveling">Traveling</mat-tab>
+        <mat-tab label="Traveling">
+            <app-travel-steps [trips]="(travelResponse$ | async)?.travel?.trips ?? []"></app-travel-steps>
+        </mat-tab>
         <mat-tab label="Sightseeing">Sightseeing</mat-tab>
     </mat-tab-group>
 </div>
