@@ -9,7 +9,7 @@ import { TravelResponse } from './models/travel-response';
 })
 export class ApiService {
   private readonly httpClient = inject(HttpClient);
-  private readonly url = 'http://localhost:8080/travel';
+  private readonly url = '/api/travel';
 
   private travelResponseSource = new BehaviorSubject<TravelResponse>(null!);
   travelResponse$ = this.travelResponseSource.asObservable();

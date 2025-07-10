@@ -8,8 +8,5 @@ public class PerplexityClient : LlmClient
     protected override string Path => $"{_llmConfiguration.Host}/chat/completions";
     protected override string Model => "sonar-pro";
 
-    public PerplexityClient(IOptions<LlmConfiguration> llmConfiguration) : base(llmConfiguration)
-    {
-        Console.WriteLine(llmConfiguration.Value.Host);
-    }
+    public PerplexityClient(IOptions<LlmConfiguration> llmConfiguration) : base(llmConfiguration) { }
 }
