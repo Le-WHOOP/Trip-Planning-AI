@@ -3,7 +3,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
@@ -18,11 +17,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApiService } from '../api/api.service';
 import { TravelRequest } from '../api/models/travel-request';
 import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-form',
   imports: [
-    CommonModule,
     MatCardModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -30,7 +29,8 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatDatepickerModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -56,7 +56,7 @@ export class HomeComponent {
   readonly countryError = signal('');
   readonly dateError = signal('');
   readonly wishesError = signal('');
-  readonly chipError = signal(false);
+  readonly loading = signal(false);
 
   constructor() {
     // Country
@@ -134,7 +134,7 @@ export class HomeComponent {
 
     console.log('Form submitted', travelRequest);
 
-    // TODO Make the button not clickable anymore and show loading animation
+    this.loading.set(true);
     await this.apiService.setTravelPlan(travelRequest);
     this.router.navigate(['/your-trip']);
   }
