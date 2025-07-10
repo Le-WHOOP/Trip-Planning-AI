@@ -7,4 +7,6 @@ public class Attraction
     public string Website { get; set; } = default!;
 
     public string Description { get; set; } = default!;
+
+    public string City { get; set; } = default!;
 }

@@ -28,13 +28,11 @@ Strictly adhere to the given JSON schema in your output. Do not include any extr
 
     private readonly ILogger<TravelService> _logger;
     private readonly ILlmClient _llmClient;
-    private readonly Parser _parser;
 
-    public TravelService(ILogger<TravelService> logger, ILlmClient llmClient, Parser parser)
+    public TravelService(ILogger<TravelService> logger, ILlmClient llmClient)
     {
         _logger = logger;
         _llmClient = llmClient;
-        _parser = parser;
     }
 
     private string GetResponseStructure()

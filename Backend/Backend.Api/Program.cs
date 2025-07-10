@@ -14,7 +14,6 @@ public static class Program
         builder.Services.Configure<LlmConfiguration>(builder.Configuration.GetSection("Llm"));
 
         builder.Services.AddScoped<TravelService>();
-        builder.Services.AddScoped<Parser>();
 
         builder.Services.AddScoped<ILlmClient, PerplexityClient>();
 
