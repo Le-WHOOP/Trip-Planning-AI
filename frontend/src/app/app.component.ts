@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { YourTripComponent } from './your-trip/your-trip.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, YourTripComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
