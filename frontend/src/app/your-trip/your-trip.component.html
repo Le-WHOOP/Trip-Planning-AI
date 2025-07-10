@@ -3,7 +3,7 @@
 <div>
     <mat-tab-group animationDuration="300ms">
         <mat-tab label="Planning">
-            <app-planning></app-planning>
+            <app-planning [cityPlanningArray]="(travelResponse$ | async)?.planning?.cityPlannings ?? []"></app-planning>
         </mat-tab>
         <mat-tab label="Traveling">
             <app-travel-steps [trips]="(travelResponse$ | async)?.travel?.trips ?? []"></app-travel-steps>

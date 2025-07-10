@@ -1,8 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CalendarComponent } from "@schedule-x/angular";
-import { CalendarEventExternal, createCalendar, createViewMonthGrid} from "@schedule-x/calendar";
+import { CalendarApp, CalendarEventExternal, createCalendar, createViewMonthGrid } from "@schedule-x/calendar";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
 import '@schedule-x/theme-default/dist/index.css';
+import { CityPlanning } from '../../api/models/city-planning';
+
+interface CityEvent {
+  id: number,
+  title: string,
+  start: string,
+  end: string,
+  description: string,
+  location: string,
+  calendarId: string
+};
 
 @Component({
   selector: 'app-planning',
@@ -11,31 +22,59 @@ import '@schedule-x/theme-default/dist/index.css';
   styleUrl: './planning.component.scss'
 })
 export class PlanningComponent {
-  cities: CalendarEventExternal[] = [];
-  calendar = createCalendar({
-    events: [
-      {
-        id: '1',
-        title: 'Paris',
-        start: this.dateToString(new Date('2025-07-14T03:24:00')),
-        end: this.dateToString(new Date('2025-07-23T03:24:00')),
-        description: 'wsh'
-      }
-    ],
-    views: [createViewMonthGrid()],
-    plugins: [createEventModalPlugin],
-  });
+  @Input({ required: true }) cityPlanningArray!: CityPlanning[];
+
+  cityEventArray: CalendarEventExternal[] = [];
+  calendar!: CalendarApp;
 
   ngOnInit(): void {
-    this.cities = [
-      {
-        id: '1',
-        title: 'Paris',
-        start: this.dateToString(new Date('2025-07-14T03:24:00')),
-        end: this.dateToString(new Date('2025-07-23T03:24:00')),
-        description: 'wsh'
-      }
-    ];
+    this.cityEventArray = this.mapCityPlanningArrayToCityEventArray(this.cityPlanningArray);
+
+    this.calendar = createCalendar({
+      events: this.cityEventArray,
+      isDark: true,
+      calendars: {
+        planning: {
+          colorName: 'planning',
+          darkColors: {
+            main: '#ffd7f5',
+            onContainer: '#ffd7f5',
+            container: '#810081'
+          }
+        }
+      },
+      views: [createViewMonthGrid()],
+      plugins: [createEventModalPlugin()],
+    });
+  }
+
+  mapCityPlanningArrayToCityEventArray(cityPlanningArray: CityPlanning[]): CityEvent[] {
+    let cityEventArray: CityEvent[] = [];
+
+    for (let id = 0; id < cityPlanningArray.length; id++) {
+      const cityEvent = this.mapCityPlanningToCityEvent(cityPlanningArray[id], id);
+      cityEventArray.push(cityEvent);
+    }
+
+    return cityEventArray;
+  }
+
+  mapCityPlanningToCityEvent(cityPlanning: CityPlanning, id: number): CityEvent {
+    const location: string = `Recommended accommodation: ${cityPlanning.accommodation.name} (${cityPlanning.accommodation.website})`;
+
+
+    console.log(location);
+    const cityEvent: CityEvent = {
+      id: id,
+      title: cityPlanning.city,
+      start: this.dateToString(cityPlanning.from),
+      end: this.dateToString(cityPlanning.to),
+      description: cityPlanning.description,
+      location: location,
+      calendarId: 'planning'
+    }
+
+    return cityEvent;
   }
 
   numberToStringWithPadding(num: number): string {
@@ -43,8 +82,10 @@ export class PlanningComponent {
   }
 
   dateToString(date: Date): string {
-    const month = this.numberToStringWithPadding(date.getMonth() + 1);
-    const day = this.numberToStringWithPadding(date.getDate() + 1);
-    return `${date.getFullYear()}-${month}-${day}`;
+    const workingDate = new Date(date);
+
+    const month = this.numberToStringWithPadding(workingDate.getMonth() + 1);
+    const day = this.numberToStringWithPadding(workingDate.getDate() + 1);
+    return `${workingDate.getFullYear()}-${month}-${day}`;
   }
 }
