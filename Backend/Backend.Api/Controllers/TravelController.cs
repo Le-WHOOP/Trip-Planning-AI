@@ -1,4 +1,5 @@
-using Backend.Api.Models;
+using Backend.Bll.Models;
+using Backend.Bll.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Api.Controllers;
@@ -7,17 +8,16 @@ namespace Backend.Api.Controllers;
 [Route("[controller]")]
 public class TravelController : ControllerBase
 {
+    private readonly TravelService _travelService;
 
-    private readonly ILogger<TravelController> _logger;
-
-    public TravelController(ILogger<TravelController> logger)
+    public TravelController(TravelService travelService)
     {
-        _logger = logger;
+        _travelService = travelService;
     }
 
     [HttpPost("")]
-    public ActionResult<Response> ComputeTravelPlan([FromBody] Request request)
+    public async Task<ActionResult<Response>> ComputeTravelPlan([FromBody] Request request)
     {
-        throw new NotImplementedException("Rip");
+        return Ok(await _travelService.DoYourThing(request));
     }
 }

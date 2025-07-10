@@ -9,7 +9,7 @@ import { TravelResponse } from './models/travel-response';
 })
 export class ApiService {
   private readonly httpClient = inject(HttpClient);
-  private readonly url = 'http://localhost:8080/travel';
+  private readonly url = '/api/travel';
 
   getTravelPlan(travelRequest: TravelRequest) : Observable<TravelResponse> {
     return this.httpClient.post<TravelResponse>(this.url, travelRequest);
