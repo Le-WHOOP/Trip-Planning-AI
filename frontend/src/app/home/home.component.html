@@ -7,7 +7,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Country</mat-label>
             <mat-icon matSuffix>location_city</mat-icon>
-            <input matInput placeholder="Paris..." [formControl]="country">
+            <input matInput placeholder="France..." [formControl]="country">
             @if (countryError()) {
                 <mat-error>{{ countryError() }}</mat-error>
             }
