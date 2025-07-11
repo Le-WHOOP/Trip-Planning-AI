@@ -1,6 +1,6 @@
 services:
 
-  backend:
+  elysian-trails-backend:
     build:
       context: ./
       dockerfile: Dockerfile
