@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CalendarComponent } from "@schedule-x/angular";
 import { CalendarApp, CalendarEventExternal, createCalendar, createViewMonthGrid } from "@schedule-x/calendar";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
-import '@schedule-x/theme-default/dist/index.css';
 import { CityPlanning } from '../../api/models/city-planning';
 
 interface CityEvent {
