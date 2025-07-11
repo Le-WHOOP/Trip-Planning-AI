@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use '@angular/material/prebuilt-themes/magenta-violet.css';
+@import '@schedule-x/theme-default/dist/index.css';
 
 @include mat.core();
 
