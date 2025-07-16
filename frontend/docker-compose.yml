@@ -1,6 +1,6 @@
 services:
 
-  frontend:
+  elysian-trails-frontend:
     build:
       context: ./
       dockerfile: Dockerfile

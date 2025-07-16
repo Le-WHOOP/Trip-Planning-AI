@@ -4,8 +4,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+ARG ELYSIAN_TRAILS_BASE_HREF=/
 COPY ./ ./
-RUN npm run build -- --configuration production --base-href /
+RUN npm run build -- --configuration production --base-href "$ELYSIAN_TRAILS_BASE_HREF"
 
 FROM nginx:alpine
 
