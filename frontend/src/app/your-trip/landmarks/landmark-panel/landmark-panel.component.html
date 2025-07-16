@@ -1,0 +1,8 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>{{cityPlanning.city}} ({{from}} - {{to}})</mat-panel-title>
+    </mat-expansion-panel-header>
+    @for (landmark of matchingLandmarks; track landmark.name) {
+        <app-landmark-card [landmark]="landmark"/>
+    }
+</mat-expansion-panel>

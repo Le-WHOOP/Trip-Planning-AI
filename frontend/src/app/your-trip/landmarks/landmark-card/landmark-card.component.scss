@@ -1,0 +1,25 @@
+mat-card-content {
+    display: flex;
+}
+
+mat-card-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    margin: 15;
+}
+
+.link {
+    margin-right: 15px;
+}
+
+.landmark-card {
+    margin-bottom: 5px;
+}
+.description {
+    margin-left: 15px;
+}

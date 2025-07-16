@@ -1,0 +1,16 @@
+<mat-card class="landmark-card">
+    <mat-card-header>
+        <div class="left">
+            <mat-card-title>{{landmark.name}}</mat-card-title>
+        </div>
+        <div class="right">
+            <mat-card-subtitle>
+                <a href={{landmark.website}} target="_blank" class="link">Visit the website</a>
+            </mat-card-subtitle>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <img mat-card-md-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Picture of the attraction">
+        <p class="description">{{landmark.description}}</p>
+    </mat-card-content>
+</mat-card>

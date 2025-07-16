@@ -1,0 +1,15 @@
+<h1>Your trip</h1>
+
+<div>
+    <mat-tab-group animationDuration="300ms">
+        <mat-tab label="Planning">
+            <app-planning [cityPlanningArray]="(travelResponse$ | async)?.planning?.cityPlannings ?? []"></app-planning>
+        </mat-tab>
+        <mat-tab label="Traveling">
+            <app-travel-steps [trips]="(travelResponse$ | async)?.travel?.trips ?? []"></app-travel-steps>
+        </mat-tab>
+        <mat-tab label="Sightseeing">
+            <app-landmarks [landmarks]="(travelResponse$ | async)?.interestPoints?.attractions ?? []" [planning]="(travelResponse$ | async)?.planning?.cityPlannings ?? []"/>
+        </mat-tab>
+    </mat-tab-group>
+</div>

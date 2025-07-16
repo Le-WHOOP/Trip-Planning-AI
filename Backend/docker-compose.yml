@@ -1,0 +1,10 @@
+services:
+
+  elysian-trails-backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    expose:
+      - 8080

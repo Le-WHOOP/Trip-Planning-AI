@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use '@angular/material/prebuilt-themes/magenta-violet.css';
+@import '@schedule-x/theme-default/dist/index.css';
+
+@include mat.core();
+
+html,
+body {
+    height: 100%;
+    color-scheme: dark;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+    text-decoration: solid;
+    text-decoration-line: underline;
+    text-decoration-color: var(--mat-sys-primary);
+}
